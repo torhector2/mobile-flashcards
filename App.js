@@ -9,7 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
+import NewDeckScreen from './components/NewDeckScreen'
 import { addDeck, handleInitialData } from './actions'
 
 
@@ -88,14 +88,6 @@ function NewCardScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Add New Card</Text>
-    </View>
-  );
-}
-
-function NewDeckScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Add New Deck</Text>
     </View>
   );
 }
