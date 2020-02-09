@@ -38,6 +38,15 @@ store.dispatch(handleInitialData())
 
 function DecksScreen({ navigation }) {
   return (
+    <Tab.Navigator>
+        <Tab.Screen name="Decks" component={DecksListScreen} />
+        <Tab.Screen name="Add Deck" component={NewDeckScreen} />
+    </Tab.Navigator>
+  );
+}
+
+function DecksListScreen({navigation}) {
+  return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Decks Screen</Text>
       <Button
@@ -45,7 +54,7 @@ function DecksScreen({ navigation }) {
         onPress={() => navigation.navigate('Deck')}
       />
     </View>
-  );
+  )
 }
 
 function DeckScreen({ navigation }) {
@@ -98,9 +107,8 @@ const Tab = Platform.OS === 'ios' ?
 
 
 function DecksRoot() {
-
   return (
-    <Stack.Navigator headerMode="none">
+    <Stack.Navigator>
       <Stack.Screen name="Decks List" component={DecksScreen} />
       <Stack.Screen name="Deck" component={DeckScreen} />
       <Stack.Screen name="New Card" component={NewCardScreen} />
@@ -114,10 +122,7 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaView style={{...safeAreaStyle}}>
         <NavigationContainer>
-          <Tab.Navigator>
-              <Tab.Screen name="Decks" component={DecksRoot} />
-              <Tab.Screen name="Add Deck" component={NewDeckScreen} />
-          </Tab.Navigator>
+          <DecksRoot />
         </NavigationContainer>
       </SafeAreaView>
     </Provider>
