@@ -105,24 +105,17 @@ const Tab = Platform.OS === 'ios' ?
   createBottomTabNavigator() :
   createMaterialTopTabNavigator()
 
-
-function DecksRoot() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Decks List" component={DecksScreen} />
-      <Stack.Screen name="Deck" component={DeckScreen} />
-      <Stack.Screen name="New Card" component={NewCardScreen} />
-      <Stack.Screen name="Quiz" component={QuizScreen} />
-    </Stack.Navigator>
-  );
-}
-
 export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaView style={{...safeAreaStyle}}>
         <NavigationContainer>
-          <DecksRoot />
+          <Stack.Navigator>
+            <Stack.Screen name="Decks List" component={DecksScreen} />
+            <Stack.Screen name="Deck" component={DeckScreen} />
+            <Stack.Screen name="New Card" component={NewCardScreen} />
+            <Stack.Screen name="Quiz" component={QuizScreen} />
+          </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
     </Provider>
