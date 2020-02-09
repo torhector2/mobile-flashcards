@@ -28,21 +28,65 @@ store.subscribe(async () => {
 store.dispatch(handleInitialData())
 
 
-function HomeScreen({ navigation }) {
+///////////////
+//
+//  MOVE THIS INTO INDIVIDUAL COMPONENTS
+//  LET'S PLAN THE NAVIGATION
+//
+///////////////
+
+
+function DecksScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+      <Text>Decks Screen</Text>
       <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
+        title="Go to Deck"
+        onPress={() => navigation.navigate('Deck')}
       />
     </View>
   );
 }
-function DetailsScreen() {
+
+function DeckScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
+      <Text>Deck 1</Text>
+      <Button
+        title="Add Card"
+        onPress={() => navigation.navigate('New Card')}
+      />
+      <Button
+        title="Start Quiz"
+        onPress={() => navigation.navigate('Quiz')}
+      />
+      <Button
+        title="Delete Deck"
+      />
+    </View>
+  );
+}
+
+function QuizScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Quiz</Text>
+    </View>
+  );
+}
+
+function NewCardScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Add New Card</Text>
+    </View>
+  );
+}
+
+function NewDeckScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Add New Deck</Text>
     </View>
   );
 }
@@ -52,14 +96,27 @@ const Tab = Platform.OS === 'ios' ?
   createBottomTabNavigator() :
   createMaterialTopTabNavigator()
 
+
+function DecksRoot() {
+
+  return (
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="Decks List" component={DecksScreen} />
+      <Stack.Screen name="Deck" component={DeckScreen} />
+      <Stack.Screen name="New Card" component={NewCardScreen} />
+      <Stack.Screen name="Quiz" component={QuizScreen} />
+    </Stack.Navigator>
+  );
+}
+
 export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaView style={{...safeAreaStyle}}>
         <NavigationContainer>
           <Tab.Navigator>
-              <Tab.Screen name="Home" component={HomeScreen} />
-              <Tab.Screen name="Details" component={DetailsScreen} />
+              <Tab.Screen name="Decks" component={DecksRoot} />
+              <Tab.Screen name="Add Deck" component={NewDeckScreen} />
           </Tab.Navigator>
         </NavigationContainer>
       </SafeAreaView>
