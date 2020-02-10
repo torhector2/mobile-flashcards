@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import DecksScreen from './components/DecksScreen'
 import NewDeckScreen from './components/NewDeckScreen'
 import { addDeck, handleInitialData } from './actions'
 
@@ -16,15 +17,9 @@ import { addDeck, handleInitialData } from './actions'
 const store = createStore(reducer, applyMiddleware(thunk));
 
 store.subscribe(async () => {
-  console.log('estoy dentro')
-  console.log(`BEFORE ${JSON.stringify(store.getState())}`)
   await AsyncStorage.setItem('@store', JSON.stringify(store.getState()))
-  console.log(`AFTER ${JSON.stringify(await AsyncStorage.getItem('@store'))} `)
 })
 
-// store.dispatch(addDeck('Paco'))
-// store.dispatch(addDeck('Maria'))
-// store.dispatch(addDeck('Manuel'))
 store.dispatch(handleInitialData())
 
 
@@ -36,26 +31,6 @@ store.dispatch(handleInitialData())
 ///////////////
 
 
-function DecksScreen({ navigation }) {
-  return (
-    <Tab.Navigator>
-        <Tab.Screen name="Decks" component={DecksListScreen} />
-        <Tab.Screen name="Add Deck" component={NewDeckScreen} />
-    </Tab.Navigator>
-  );
-}
-
-function DecksListScreen({navigation}) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Decks Screen</Text>
-      <Button
-        title="Go to Deck"
-        onPress={() => navigation.navigate('Deck')}
-      />
-    </View>
-  )
-}
 
 function DeckScreen({ navigation }) {
   return (
@@ -93,9 +68,7 @@ function NewCardScreen() {
 }
 
 const Stack = createStackNavigator();
-const Tab = Platform.OS === 'ios' ? 
-  createBottomTabNavigator() :
-  createMaterialTopTabNavigator()
+
 
 export default function App() {
   return (
