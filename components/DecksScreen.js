@@ -22,7 +22,6 @@ export default function DecksScreen({ navigation }) {
             iconName = 'addfolder';
           }
 
-          // You can return any component that you like here!
           return <AntDesign name={iconName} size={size} color={color} />;
         },
       })}>

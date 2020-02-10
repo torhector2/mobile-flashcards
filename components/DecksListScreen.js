@@ -23,13 +23,21 @@ function Item({ id, title, questionsNumber, onSelect }) {
 }
 
 class DecksListScreen extends Component {
-    onSelect (id) {
-        alert(id)
-        //Navigate to the deck from here with the id
-    }
+  onSelect(id) {
+    alert(id);
+    //Navigate to the deck from here with the id
+  }
 
   render() {
-    const { navigation, decksSorted } = this.props;
+    const { navigation, decksSorted, empty } = this.props;
+    if (empty) {
+        return(
+            <SafeAreaView style={styles.container}>
+                <Text style={styles.title}>You don't have Decks</Text>
+                <Text style={styles.subtitle}>Please add a new deck to start studying</Text>
+            </SafeAreaView>
+        )
+    }
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
@@ -54,6 +62,7 @@ const mapStateToProps = state => {
     (a, b) => a.created - b.created
   );
   return {
+    empty: Object.keys(state).length === 0,
     decksSorted
   };
 };
