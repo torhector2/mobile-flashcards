@@ -11,6 +11,7 @@ function decks (state = {}, action) {
         return {
           ...state,
           [action.deck]: {
+            id: action.deck,
             title: action.deck,
             created: Date.now(),
             questions: []

@@ -20,6 +20,9 @@ store.subscribe(async () => {
   await AsyncStorage.setItem('@store', JSON.stringify(store.getState()))
 })
 
+//USE THIS TO DELETE THE AsyncStorage
+// AsyncStorage.clear()
+
 store.dispatch(handleInitialData())
 
 
