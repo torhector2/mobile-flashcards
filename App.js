@@ -7,11 +7,9 @@ import reducer from './reducers'
 import { AsyncStorage } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import DecksScreen from './components/DecksScreen'
-import NewDeckScreen from './components/NewDeckScreen'
-import { addDeck, handleInitialData } from './actions'
+import DeckScreen from './components/DeckScreen'
+import { handleInitialData } from './actions'
 
 
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -32,27 +30,6 @@ store.dispatch(handleInitialData())
 //  LET'S PLAN THE NAVIGATION
 //
 ///////////////
-
-
-
-function DeckScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Deck 1</Text>
-      <Button
-        title="Add Card"
-        onPress={() => navigation.navigate('New Card')}
-      />
-      <Button
-        title="Start Quiz"
-        onPress={() => navigation.navigate('Quiz')}
-      />
-      <Button
-        title="Delete Deck"
-      />
-    </View>
-  );
-}
 
 function QuizScreen() {
   return (

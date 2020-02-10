@@ -23,20 +23,22 @@ function Item({ id, title, questionsNumber, onSelect }) {
 }
 
 class DecksListScreen extends Component {
-  onSelect(id) {
-    alert(id);
-    //Navigate to the deck from here with the id
+ 
+  onSelect = (id) => {
+    this.props.navigation.navigate('Deck', { id })
   }
 
   render() {
-    const { navigation, decksSorted, empty } = this.props;
+    const { decksSorted, empty } = this.props;
     if (empty) {
-        return(
-            <SafeAreaView style={styles.container}>
-                <Text style={styles.title}>You don't have Decks</Text>
-                <Text style={styles.subtitle}>Please add a new deck to start studying</Text>
-            </SafeAreaView>
-        )
+      return (
+        <SafeAreaView style={styles.container}>
+          <Text style={styles.title}>You don't have Decks</Text>
+          <Text style={styles.subtitle}>
+            Please add a new deck to start studying
+          </Text>
+        </SafeAreaView>
+      );
     }
     return (
       <SafeAreaView style={styles.container}>
