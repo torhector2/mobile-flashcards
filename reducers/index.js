@@ -12,6 +12,7 @@ function decks (state = {}, action) {
           ...state,
           [action.deck]: {
             title: action.deck,
+            created: Date.now(),
             questions: []
           }
         }
