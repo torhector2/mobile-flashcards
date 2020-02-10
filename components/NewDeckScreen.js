@@ -69,12 +69,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
+    alignItems: "stretch",
     justifyContent: "center"
   },
   text: {
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    textAlign: "center",
+    marginHorizontal: 16,
   },
   textInput: {
     marginTop: 20,
@@ -86,6 +88,6 @@ const styles = StyleSheet.create({
     paddingLeft: 6
   },
   button: {
-    flex: 1
+    marginHorizontal: 16
   }
 });
