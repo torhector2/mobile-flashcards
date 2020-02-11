@@ -18,7 +18,7 @@ class DeckScreen extends Component {
         <Text style={styles.subtitle}>{`${cardsNumber} Cards`}</Text>
         <TouchableHighlight
           style={styles.touchable}
-          onPress={() => navigation.navigate("New Card")}
+          onPress={() => navigation.navigate("New Card", {id})}
         >
           <Text style={styles.touchableTitle}>Add Card</Text>
         </TouchableHighlight>

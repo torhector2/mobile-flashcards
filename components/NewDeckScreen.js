@@ -21,7 +21,6 @@ class NewDeckScreen extends Component {
   onPress(e) {
     let { deckName } = this.state || ''
     const { deckTitles} = this.props
-    console.log(`Estos son los deck titles: ${deckTitles}`)
     deckName = deckName.trim()
     if (deckName.length === 0) {
         alert('Please add a valid Deck Title')

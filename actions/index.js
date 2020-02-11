@@ -3,6 +3,7 @@ import { AsyncStorage } from "react-native"
 export const ADD_INITIAL_DATA = 'ADD_INITIAL_DATA'
 export const ADD_DECK = 'ADD_DECK'
 export const DELETE_DECK = 'DELETE_DECK'
+export const ADD_QUESTION = 'ADD_QUESTION'
 
 
 export function handleInitialData () {
@@ -31,6 +32,15 @@ export function addDeck (deck) {
 export function deleteDeck (deck) {
     return {
         type: DELETE_DECK,
+        deck
+    }
+}
+
+export function addQuestion ({question, answer, deck}) {
+    return {
+        type: ADD_QUESTION,
+        question,
+        answer,
         deck
     }
 }

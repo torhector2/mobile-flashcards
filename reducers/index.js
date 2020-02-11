@@ -1,4 +1,4 @@
-import { ADD_DECK, ADD_INITIAL_DATA, DELETE_DECK } from '../actions'
+import { ADD_DECK, ADD_INITIAL_DATA, DELETE_DECK, ADD_QUESTION } from '../actions'
 
 function decks (state = {}, action) {
     switch (action.type) {
@@ -24,6 +24,18 @@ function decks (state = {}, action) {
             }
             return object
           }, {})
+          case ADD_QUESTION:
+            return {
+              ...state, 
+              [action.deck]: {
+                ...state[action.deck],
+                questions: state[action.deck].questions.concat({
+                  question: action.question,
+                  answer: action.answer,
+                  created: Date.now()
+                }),
+              }
+            }
       default :
         return state
     }

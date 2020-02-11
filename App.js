@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import DecksScreen from './components/DecksScreen'
 import DeckScreen from './components/DeckScreen'
+import NewCardScreen from './components/NewCardScreen'
 import { handleInitialData } from './actions'
 
 
@@ -35,14 +36,6 @@ function QuizScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Quiz</Text>
-    </View>
-  );
-}
-
-function NewCardScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Add New Card</Text>
     </View>
   );
 }
