@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
+import { deleteDeck } from '../actions'
 
 class DeckScreen extends Component {
   render() {
-    const { route, navigation, cardsNumber } = this.props;
+    const { route, navigation, cardsNumber, goBack } = this.props;
     const { id } = route.params;
+    if (goBack) {
+      navigation.navigate("Decks List")
+      return null
+    }
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{id}</Text>
@@ -24,7 +30,7 @@ class DeckScreen extends Component {
         </TouchableHighlight>
         <TouchableHighlight
           style={[styles.touchable, styles.delete]}
-          onPress={() => alert("delete")}
+          onPress={() => this.props.dispatch(deleteDeck(id))}
         >
           <Text style={styles.touchableTitle}>Delete Deck</Text>
         </TouchableHighlight>
@@ -36,8 +42,16 @@ class DeckScreen extends Component {
 const mapStateToProps = (state, props) => {
   const { route } = props;
   const { id } = route.params;
+  if (state[id] === undefined) {
+    return {
+      goBack: true
+    }
+  }
 
-  return { cardsNumber: state[id].questions.length || 0 };
+  return { 
+    cardsNumber: state[id].questions.length || 0,
+    goBack: false 
+  };
 };
 
 export default connect(mapStateToProps)(DeckScreen);

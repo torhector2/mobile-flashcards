@@ -1,4 +1,4 @@
-import { ADD_DECK, ADD_INITIAL_DATA } from '../actions'
+import { ADD_DECK, ADD_INITIAL_DATA, DELETE_DECK } from '../actions'
 
 function decks (state = {}, action) {
     switch (action.type) {
@@ -17,6 +17,13 @@ function decks (state = {}, action) {
             questions: []
           }
         }
+        case DELETE_DECK:
+          return Object.keys(state).reduce((object, key) => {
+            if (key !== action.deck) {
+              object[key] = state[key]
+            }
+            return object
+          }, {})
       default :
         return state
     }
