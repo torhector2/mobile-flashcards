@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   touchable: {
     backgroundColor: "#ABEBC6",
     padding: 20,
-    marginVertical: 16,
+    marginVertical: 60,
     marginHorizontal: 16
   },
   touchableCorrect: {
