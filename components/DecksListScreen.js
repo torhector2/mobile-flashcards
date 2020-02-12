@@ -59,12 +59,13 @@ class DecksListScreen extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const decksSorted = Object.values(state).sort(
+const mapStateToProps = (state) => {
+  let {decks} = state
+  const decksSorted = Object.values(decks).sort(
     (a, b) => a.created - b.created
   );
   return {
-    empty: Object.keys(state).length === 0,
+    empty: Object.keys(decks).length === 0,
     decksSorted
   };
 };

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Platform, SafeAreaView } from 'react-na
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux'
-import reducer from './reducers'
+import reducers from './reducers'
 import { AsyncStorage } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,7 +13,7 @@ import NewCardScreen from './components/NewCardScreen'
 import { handleInitialData } from './actions'
 
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducers, applyMiddleware(thunk));
 
 store.subscribe(async () => {
   await AsyncStorage.setItem('@store', JSON.stringify(store.getState()))

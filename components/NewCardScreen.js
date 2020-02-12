@@ -72,7 +72,7 @@ class NewCardScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = ({decks}) => ({
     
 })
 

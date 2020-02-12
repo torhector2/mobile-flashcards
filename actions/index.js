@@ -9,8 +9,7 @@ export const ADD_QUESTION = 'ADD_QUESTION'
 export function handleInitialData () {
     return async (dispatch) => {
         const storedData = await AsyncStorage.getItem('@store')
-        const decks = JSON.parse(storedData)
-        console.log(`ESTOS SON LOS DECKS: ${JSON.stringify(decks)}`)
+        const decks = storedData !== null ? JSON.parse(storedData).decks : {}
         dispatch(addInitialData(decks))
     }
 }

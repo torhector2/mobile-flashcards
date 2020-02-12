@@ -39,17 +39,17 @@ class DeckScreen extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = ({decks}, props) => {
   const { route } = props;
   const { id } = route.params;
-  if (state[id] === undefined) {
+  if (decks[id] === undefined) {
     return {
       goBack: true
     }
   }
 
   return { 
-    cardsNumber: state[id].questions.length || 0,
+    cardsNumber: decks[id].questions.length || 0,
     goBack: false 
   };
 };

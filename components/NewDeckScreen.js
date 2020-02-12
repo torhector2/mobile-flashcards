@@ -58,8 +58,8 @@ class NewDeckScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-    deckTitles: Object.keys(state)
+const mapStateToProps = ({decks}) => ({
+    deckTitles: Object.keys(decks)
 })
 
 export default connect(mapStateToProps)(NewDeckScreen);
