@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Platform, SafeAreaView } from 'react-native';
+import { StyleSheet, Platform, SafeAreaView } from 'react-native';
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux'
@@ -10,6 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import DecksScreen from './components/DecksScreen'
 import DeckScreen from './components/DeckScreen'
 import NewCardScreen from './components/NewCardScreen'
+import QuizScreen from './components/QuizScreen'
 import { handleInitialData } from './actions'
 
 
@@ -23,22 +24,6 @@ store.subscribe(async () => {
 // AsyncStorage.clear()
 
 store.dispatch(handleInitialData())
-
-
-///////////////
-//
-//  MOVE THIS INTO INDIVIDUAL COMPONENTS
-//  LET'S PLAN THE NAVIGATION
-//
-///////////////
-
-function QuizScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Quiz</Text>
-    </View>
-  );
-}
 
 const Stack = createStackNavigator();
 
@@ -61,12 +46,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   androidSafeArea: {
     flex: 1,
     marginTop: 25
