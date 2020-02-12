@@ -24,7 +24,7 @@ class DeckScreen extends Component {
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.touchable}
-          onPress={() => navigation.navigate("Quiz")}
+          onPress={() => navigation.navigate("Quiz", {id})}
         >
           <Text style={styles.touchableTitle}>Start Quiz</Text>
         </TouchableHighlight>
