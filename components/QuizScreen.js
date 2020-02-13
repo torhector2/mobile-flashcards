@@ -14,6 +14,8 @@ class QuizScreen extends Component {
   };
   answer = (userAnswer) => {
     console.log(`User Answer: ${userAnswer}`);
+    const answers = this.state.answers.concat(userAnswer)
+    this.setState({answers})
   };
   render() {
     if (this.props.empty) {
@@ -30,6 +32,22 @@ class QuizScreen extends Component {
     const { questions } = this.props
     const { answers } = this.state
     const currentCard = questions[answers.length]
+
+    if (answers.length === questions.length) {
+      const correct = answers.filter(result => result === true).length
+      const formattedResult = (correct/answers.length*100).toFixed(0)
+      return(
+        <View style={styles.container}>
+          <Text style={styles.resultNumber}>
+            {formattedResult}%
+          </Text>
+          <Text style={styles.text}>
+            Correct
+          </Text>
+        </View>
+      )
+    }
+
     return (
       <View style={styles.container}>
         <Text style={styles.cardNumber}>{`${answers.length + 1}/${questions.length}`}</Text>
@@ -84,6 +102,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 30,
     fontSize: 20
+  },
+  resultNumber: {
+    textAlign: "center",
+    marginHorizontal: 16,
+    marginTop: 30,
+    fontSize: 60,
+    fontWeight: "bold"
   },
   cardNumber: {
     alignSelf: "flex-start",
