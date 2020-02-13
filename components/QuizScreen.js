@@ -27,11 +27,16 @@ class QuizScreen extends Component {
       );
     }
     let { showing } = this.state;
+    const { questions } = this.props
+    const { answers } = this.state
+    const currentCard = questions[answers.length]
     return (
       <View style={styles.container}>
-        <Text style={styles.cardNumber}>1/10</Text>
+        <Text style={styles.cardNumber}>{`${answers.length + 1}/${questions.length}`}</Text>
         <Text style={styles.text}>
-          Quizzz. {JSON.stringify(this.props.questions)}
+              {showing === "question"
+              ? currentCard.question
+              : currentCard.answer}
         </Text>
         <TouchableHighlight style={styles.touchable} onPress={this.flip}>
           <Text style={styles.flip}>
@@ -57,6 +62,17 @@ class QuizScreen extends Component {
   }
 }
 
+const mapStateToProps = ({ decks }, props) => {
+  const { id } = props.route.params;
+  const { questions } = decks[id];
+  return {
+    questions,
+    empty: questions.length === 0,
+  };
+};
+
+export default connect(mapStateToProps)(QuizScreen);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -65,7 +81,9 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    marginHorizontal: 16
+    marginHorizontal: 16,
+    marginTop: 30,
+    fontSize: 20
   },
   cardNumber: {
     alignSelf: "flex-start",
@@ -108,14 +126,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   }
 });
-
-const mapStateToProps = ({ decks }, props) => {
-  const { id } = props.route.params;
-  const { questions } = decks[id];
-  return {
-    questions,
-    empty: questions.length === 0
-  };
-};
-
-export default connect(mapStateToProps)(QuizScreen);
