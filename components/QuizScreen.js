@@ -18,6 +18,7 @@ class QuizScreen extends Component {
     this.setState({answers})
   };
   render() {
+    //Empty Deck
     if (this.props.empty) {
       return (
         <View style={styles.container}>
@@ -28,6 +29,8 @@ class QuizScreen extends Component {
         </View>
       );
     }
+
+    // Quiz result
     let { showing } = this.state;
     const { questions } = this.props
     const { answers } = this.state
@@ -48,6 +51,7 @@ class QuizScreen extends Component {
       )
     }
 
+    //Question - Answer card
     return (
       <View style={styles.container}>
         <Text style={styles.cardNumber}>{`${answers.length + 1}/${questions.length}`}</Text>
