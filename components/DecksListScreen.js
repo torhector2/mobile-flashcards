@@ -30,6 +30,13 @@ class DecksListScreen extends Component {
 
   render() {
     const { decksSorted, empty } = this.props;
+    const { params } = this.props.route
+    const newCreatedDeck = params ? params.deckName : undefined
+    //if we come from a new created deck then redirect to the deck details
+    if (newCreatedDeck) {
+      this.props.navigation.navigate('Deck', { id: newCreatedDeck })
+    }
+
     if (empty) {
       return (
         <SafeAreaView style={styles.container}>

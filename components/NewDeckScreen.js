@@ -34,7 +34,7 @@ class NewDeckScreen extends Component {
 
     this.props.dispatch(addDeck(deckName))
     this.setState({deckName: ''})
-    this.props.navigation.navigate('Decks')
+    this.props.navigation.navigate('Decks', { deckName })
   }
 
   render() {
