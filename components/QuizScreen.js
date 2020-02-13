@@ -13,7 +13,6 @@ class QuizScreen extends Component {
     });
   };
   answer = (userAnswer) => {
-    console.log(`User Answer: ${userAnswer}`);
     const answers = this.state.answers.concat(userAnswer)
     this.setState({answers})
   };
