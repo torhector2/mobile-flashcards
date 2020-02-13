@@ -121,11 +121,11 @@ const styles = StyleSheet.create({
   },
   flip: {
     textAlign: "center",
-    color: "#138D75",
+    color: "#2E86C1",
     fontWeight: "bold"
   },
   touchable: {
-    backgroundColor: "#ABEBC6",
+    backgroundColor: "#D6EAF8",
     padding: 20,
     marginVertical: 60,
     marginHorizontal: 16
