@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { Notifications } from "expo";
+import * as Permissions from "expo-permissions";
 
 class QuizScreen extends Component {
   state = {
@@ -12,16 +14,59 @@ class QuizScreen extends Component {
       showing: this.state.showing === "question" ? "answer" : "question"
     });
   };
-  answer = (userAnswer) => {
-    const answers = this.state.answers.concat(userAnswer)
-    this.setState({answers})
+  answer = userAnswer => {
+    const answers = this.state.answers.concat(userAnswer);
+    this.setState({ answers });
   };
   restart = () => {
     this.setState({
       answers: [],
       showing: "question"
-    })
+    });
+
+    // this.handleNotifications();
+  };
+  handleNotifications = async () => {
+    const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    if (status !== "granted") {
+      const { status, permissions } = await Permissions.askAsync(
+        Permissions.NOTIFICATIONS
+      );
+      console.log('the status is: ' + status)
+      if (status === "granted") {
+        this.addNotification()
+      } else {
+        // throw new Error("Location permission not granted");
+      }
+    } else {
+      this.addNotification()
+    }
+    
+  };
+
+  addNotification = () => {
+    const localNotification = {
+      title: "Reminder",
+      body: "You didn't study yet",
+      ios: {
+        sound: true,
+        _displayInForeground: true
+      }
+    };
+    const date = new Date() //today
+    date.setDate(date.getDate() + 1); // tomorrow's date
+    date.setHours(19, 0, 0) //set the reminder always at 7PM next day
+
+    const schedulingOptions = {
+      time: date
+    };
+    Notifications.cancelAllScheduledNotificationsAsync(); //cancel previous notifications as the user studied today
+    Notifications.scheduleLocalNotificationAsync(
+      localNotification,
+      schedulingOptions
+    );
   }
+
   render() {
     //Empty Deck
     if (this.props.empty) {
@@ -37,38 +82,33 @@ class QuizScreen extends Component {
 
     // Quiz result
     let { showing } = this.state;
-    const { questions } = this.props
-    const { answers } = this.state
-    const currentCard = questions[answers.length]
+    const { questions } = this.props;
+    const { answers } = this.state;
+    const currentCard = questions[answers.length];
 
     if (answers.length === questions.length) {
-      const correct = answers.filter(result => result === true).length
-      const formattedResult = (correct/answers.length*100).toFixed(0)
-      return(
+      const correct = answers.filter(result => result === true).length;
+      const formattedResult = ((correct / answers.length) * 100).toFixed(0);
+      this.handleNotifications()
+      return (
         <View style={styles.container}>
-          <Text style={styles.resultNumber}>
-            {formattedResult}%
-          </Text>
-          <Text style={styles.text}>
-            Correct
-          </Text>
+          <Text style={styles.resultNumber}>{formattedResult}%</Text>
+          <Text style={styles.text}>Correct</Text>
           <TouchableHighlight style={styles.restart} onPress={this.restart}>
-            <Text style={styles.flip}>
-              Restart Quiz
-            </Text>
+            <Text style={styles.flip}>Restart Quiz</Text>
           </TouchableHighlight>
         </View>
-      )
+      );
     }
 
     //Question - Answer card
     return (
       <View style={styles.container}>
-        <Text style={styles.cardNumber}>{`${answers.length + 1}/${questions.length}`}</Text>
+        <Text style={styles.cardNumber}>{`${answers.length + 1}/${
+          questions.length
+        }`}</Text>
         <Text style={styles.text}>
-              {showing === "question"
-              ? currentCard.question
-              : currentCard.answer}
+          {showing === "question" ? currentCard.question : currentCard.answer}
         </Text>
         <TouchableHighlight style={styles.touchable} onPress={this.flip}>
           <Text style={styles.flip}>
@@ -99,7 +139,7 @@ const mapStateToProps = ({ decks }, props) => {
   const { questions } = decks[id];
   return {
     questions,
-    empty: questions.length === 0,
+    empty: questions.length === 0
   };
 };
 
