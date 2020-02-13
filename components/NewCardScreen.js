@@ -72,11 +72,7 @@ class NewCardScreen extends Component {
   }
 }
 
-const mapStateToProps = ({decks}) => ({
-    
-})
-
-export default connect(mapStateToProps)(NewCardScreen);
+export default connect()(NewCardScreen);
 
 const styles = StyleSheet.create({
   container: {
@@ -93,7 +89,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   textInput: {
-    marginTop: 20,
+    marginVertical: 20,
     marginHorizontal: 16,
     alignSelf: "stretch",
     height: 40,
@@ -103,6 +99,5 @@ const styles = StyleSheet.create({
   },
   button: {
     marginHorizontal: 16,
-    marginTop: 16
   }
 });

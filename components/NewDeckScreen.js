@@ -84,9 +84,10 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
-    paddingLeft: 6
+    paddingLeft: 6,
+    marginBottom: 16
   },
   button: {
-    marginHorizontal: 16
+    marginHorizontal: 16,
   }
 });
