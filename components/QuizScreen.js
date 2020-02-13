@@ -16,6 +16,12 @@ class QuizScreen extends Component {
     const answers = this.state.answers.concat(userAnswer)
     this.setState({answers})
   };
+  restart = () => {
+    this.setState({
+      answers: [],
+      showing: "question"
+    })
+  }
   render() {
     //Empty Deck
     if (this.props.empty) {
@@ -46,6 +52,11 @@ class QuizScreen extends Component {
           <Text style={styles.text}>
             Correct
           </Text>
+          <TouchableHighlight style={styles.restart} onPress={this.restart}>
+            <Text style={styles.flip}>
+              Restart Quiz
+            </Text>
+          </TouchableHighlight>
         </View>
       )
     }
@@ -127,6 +138,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#D6EAF8",
     padding: 20,
     marginVertical: 60,
+    marginHorizontal: 16
+  },
+  restart: {
+    backgroundColor: "#D6EAF8",
+    padding: 20,
+    marginVertical: 120,
     marginHorizontal: 16
   },
   touchableCorrect: {
